@@ -15,6 +15,8 @@ export default function ElasticNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>(0);
   const pointsRef = useRef<Point[]>([]);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const imagePatternRef = useRef<number[]>([]);
 
   const config = {
     spacing: 40,
@@ -37,10 +39,33 @@ export default function ElasticNetwork() {
 
     const mouse = { x: -1000, y: -1000 };
 
+    // Load images
+    const imageCount = 17;
+    let imagesLoaded = 0;
+    
+    for (let i = 1; i <= imageCount; i++) {
+      const img = new Image();
+      img.src = `/icons/1 (${i}).jpg`;
+      img.onload = () => {
+        imagesLoaded++;
+        if (imagesLoaded === imageCount && !animationFrameRef.current) {
+          animate();
+        }
+      };
+      imagesRef.current.push(img);
+    }
+
     const initPoints = () => {
       pointsRef.current = [];
+      imagePatternRef.current = [];
       cols = Math.ceil(width / config.spacing) + 1;
       rows = Math.ceil(height / config.spacing) + 1;
+      
+      // Create random image pattern
+      const totalCells = (cols - 1) * (rows - 1);
+      for (let i = 0; i < totalCells; i++) {
+        imagePatternRef.current.push(Math.floor(Math.random() * imageCount));
+      }
       
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
@@ -72,12 +97,9 @@ export default function ElasticNetwork() {
     initPoints();
 
     const animate = () => {
-      // Clear with slight trail ?? No, transparent background clear for clean lines
-      ctx.fillStyle = "#111";
+      // Clear with black background
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, width, height);
-      
-      ctx.strokeStyle = "rgba(100, 200, 255, 0.2)";
-      ctx.lineWidth = 1;
 
       pointsRef.current.forEach((p, idx) => {
          // Spring force to origin
@@ -109,55 +131,73 @@ export default function ElasticNetwork() {
          
          p.x += p.vx;
          p.y += p.vy;
-         
-         // Draw connections
-         // Right neighbor
-         if ((idx + 1) % rows !== 0 && idx + rows < pointsRef.current.length) {
-            // This logic for neighbor is tricky with flat array.
-            // Let's just draw dots for now? No, need lines.
-            // Simplified: Draw line to next point in list if it's in same col
-         }
       });
       
-      // Draw lines safely
-      for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
+      // Draw image-filled grid cells
+      let cellIndex = 0;
+      for (let i = 0; i < cols - 1; i++) {
+          for (let j = 0; j < rows - 1; j++) {
               const idx = i * rows + j;
-              const p = pointsRef.current[idx];
-              if (!p) continue;
+              const p1 = pointsRef.current[idx];
+              const p2 = pointsRef.current[idx + 1];
+              const p3 = pointsRef.current[idx + rows];
+              const p4 = pointsRef.current[idx + rows + 1];
+              
+              if (!p1 || !p2 || !p3 || !p4) continue;
 
-              // Down neighbor
-              if (j < rows - 1) {
-                  const p2 = pointsRef.current[idx + 1];
-                  if (p2) {
-                      ctx.beginPath();
-                      ctx.moveTo(p.x, p.y);
-                      ctx.lineTo(p2.x, p2.y);
-                      ctx.stroke();
-                  }
+              const imageIndex = imagePatternRef.current[cellIndex];
+              const img = imagesRef.current[imageIndex];
+              
+              if (img && img.complete) {
+                // Save context state
+                ctx.save();
+                
+                // Create clipping path for the deformed cell
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.lineTo(p4.x, p4.y);
+                ctx.lineTo(p3.x, p3.y);
+                ctx.closePath();
+                ctx.clip();
+                
+                // Calculate bounding box of the deformed cell
+                const minX = Math.min(p1.x, p2.x, p3.x, p4.x);
+                const maxX = Math.max(p1.x, p2.x, p3.x, p4.x);
+                const minY = Math.min(p1.y, p2.y, p3.y, p4.y);
+                const maxY = Math.max(p1.y, p2.y, p3.y, p4.y);
+                const cellWidth = maxX - minX;
+                const cellHeight = maxY - minY;
+                
+                // Draw image to fill the cell
+                ctx.drawImage(img, minX, minY, cellWidth, cellHeight);
+                
+                // Restore context
+                ctx.restore();
+                
+                // Draw subtle border
+                ctx.strokeStyle = "rgba(0, 0, 0, 0.3)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.lineTo(p4.x, p4.y);
+                ctx.lineTo(p3.x, p3.y);
+                ctx.closePath();
+                ctx.stroke();
               }
               
-              // Right neighbor
-              if (i < cols - 1) {
-                  const pRight = pointsRef.current[idx + rows];
-                  if (pRight) {
-                      ctx.beginPath();
-                      ctx.moveTo(p.x, p.y);
-                      ctx.lineTo(pRight.x, pRight.y);
-                      ctx.stroke();
-                  }
-              }
-              
-              // Draw point
-              ctx.fillStyle = "rgba(255,255,255,0.5)";
-              ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
+              cellIndex++;
           }
       }
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Animation will start once all images are loaded
+    if (imagesLoaded === imageCount) {
+      animate();
+    }
 
     return () => {
       window.removeEventListener("resize", resize);
@@ -167,5 +207,5 @@ export default function ElasticNetwork() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full bg-[#111]" />;
+  return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full bg-black" />;
 }
