@@ -4,7 +4,7 @@ import Delaunator from "delaunator";
 
 export default function DelaunayAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   
   // Points
   interface Point {

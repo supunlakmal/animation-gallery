@@ -66,7 +66,6 @@ export default function SoftBody() {
       ctx.moveTo(points[0].x, points[0].y);
       for(let i=1; i<=numPoints; i++) {
           const p = points[i % numPoints];
-          const nextP = points[(i+1)%numPoints]; // Use midpoints for smooth curve?
           // Simple line to
           ctx.lineTo(p.x, p.y);
       }
@@ -84,7 +83,7 @@ export default function SoftBody() {
     };
     
     // Interaction: distort points
-    const handleMouseDown = (e: MouseEvent) => {
+    const handleMouseDown = () => {
         points.forEach(p => {
             p.vx += (Math.random() - 0.5) * 50;
             p.vy += (Math.random() - 0.5) * 50;

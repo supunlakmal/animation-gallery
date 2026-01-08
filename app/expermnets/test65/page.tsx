@@ -30,7 +30,7 @@ const edges = [
 
 export default function Hypercube() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -84,7 +84,6 @@ export default function Hypercube() {
 
       // Project and Draw
       const projected2D: {x: number, y: number}[] = [];
-      const scale = 150;
 
       for (let i = 0; i < vertices4D.length; i++) {
         let v = vertices4D[i];

@@ -131,6 +131,8 @@ export default function AttractorConductorBackground() {
       window.removeEventListener("mousemove", handleMouseMove);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

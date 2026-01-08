@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
 
 // --- Configuration ---
@@ -186,6 +186,8 @@ export default function AetherFlux() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

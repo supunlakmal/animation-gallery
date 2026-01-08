@@ -41,7 +41,6 @@ export default function NeonPulseGrid() {
             Math.pow(posY - canvas.height / 2, 2)
           );
 
-          const maxDist = Math.sqrt(Math.pow(canvas.width / 2, 2) + Math.pow(canvas.height / 2, 2));
           const wave = Math.sin(dist * 0.01 - time) * 0.5 + 0.5; // 0 to 1
 
           const size = wave * 3 + 1;

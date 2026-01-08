@@ -15,7 +15,7 @@ export default function LightningBolt() {
     canvas.width = width;
     canvas.height = height;
 
-    let bolts: {x1: number, y1: number, x2: number, y2: number, alpha: number}[] = [];
+    const bolts: {x1: number, y1: number, x2: number, y2: number, alpha: number}[] = [];
     
     const createBolt = (x: number, y: number, targetX: number, targetY: number) => {
         // Recursive? Or simple segments

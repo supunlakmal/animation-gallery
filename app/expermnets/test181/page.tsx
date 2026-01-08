@@ -11,7 +11,7 @@ export default function DigitalClock() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
+    let animationId: number | null = null;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -97,7 +97,7 @@ export default function DigitalClock() {
         const timeStr = [Math.floor(h/10), h%10, Math.floor(m/10), m%10, Math.floor(s/10), s%10];
         
         const size = 100;
-        let startX = (canvas.width - (6 * size * 0.8 + 2 * size * 0.5)) / 2;
+        const startX = (canvas.width - (6 * size * 0.8 + 2 * size * 0.5)) / 2;
         const cy = (canvas.height - size) / 2;
 
         timeStr.forEach((digit, i) => {
@@ -123,7 +123,7 @@ export default function DigitalClock() {
 
     return () => {
         window.removeEventListener("resize", resize);
-        cancelAnimationFrame(animationId);
+        if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
 

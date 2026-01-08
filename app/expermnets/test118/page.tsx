@@ -63,7 +63,7 @@ export default function Boids() {
       ctx.fillRect(0, 0, width, height);
       
       // Simple logic loop (real boids is O(N^2) without quadtree, but 100 is fine)
-      for (let boid of boids) {
+      for (const boid of boids) {
           // Boid rules omitted for brevity, just random + momentum
           // Alignment
           let avgVx = 0;
@@ -72,7 +72,7 @@ export default function Boids() {
           let avgY = 0;
           let count = 0;
           
-          for(let other of boids) {
+          for(const other of boids) {
               const d = Math.hypot(boid.x - other.x, boid.y - other.y);
               if (other !== boid && d < 50) {
                   avgVx += other.vx;

@@ -77,7 +77,7 @@ export default function DigitalSilk() {
 
       const t = time * 0.001;
 
-      trailsRef.current.forEach((trail, i) => {
+      trailsRef.current.forEach((trail) => {
         const head = trail.points[0];
         
         // Influence of noise and mouse
@@ -139,6 +139,8 @@ export default function DigitalSilk() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

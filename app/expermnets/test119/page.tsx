@@ -10,8 +10,8 @@ export default function ReactionDiffusion() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     // Scale down for performance
     const scale = 4;
     const w = Math.floor(width / scale);
@@ -119,18 +119,9 @@ export default function ReactionDiffusion() {
       requestAnimationFrame(animate);
     };
 
-    const handleResize = () => {
-      // Need to re-init on resize otherwise arrays break
-      const wNew = Math.floor(window.innerWidth / scale);
-      const hNew = Math.floor(window.innerHeight / scale);
-      // ... skip for brevity, just reload page
-    };
-
-    // window.addEventListener("resize", handleResize);
     const id = requestAnimationFrame(animate);
 
     return () => {
-      // window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(id);
     };
   }, []);

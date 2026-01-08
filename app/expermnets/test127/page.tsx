@@ -25,7 +25,7 @@ export default function SmokePuffs() {
         growth: number;
     }
     
-    let puffs: Puff[] = [];
+    const puffs: Puff[] = [];
     
     const animate = () => {
       ctx.fillStyle = "#333";

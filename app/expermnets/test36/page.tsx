@@ -26,8 +26,8 @@ export default function GravitationalVoid() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    const width = (canvas.width = window.innerWidth);
+    const height = (canvas.height = window.innerHeight);
     mouseRef.current = { x: width / 2, y: height / 2 };
 
     const particles: Particle[] = Array.from({ length: CONFIG.particleCount }, () => ({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createNoise2D } from "simplex-noise";
 
 // --- Configuration ---
@@ -79,7 +79,7 @@ export default function LiquidVortex() {
       mouseRef.current.active = false;
     };
 
-    const animate = (time: number) => {
+    const animate = () => {
       timeRef.current += CONFIG.noiseSpeed;
       const t = timeRef.current;
 
@@ -151,6 +151,8 @@ export default function LiquidVortex() {
       window.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animId);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

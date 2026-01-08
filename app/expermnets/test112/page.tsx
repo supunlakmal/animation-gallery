@@ -23,7 +23,7 @@ export default function RippleEffect() {
         color: string;
     }
     
-    let ripples: Ripple[] = [];
+    const ripples: Ripple[] = [];
     
     const animate = () => {
       ctx.fillStyle = "#000";

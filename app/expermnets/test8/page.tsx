@@ -14,9 +14,8 @@ interface Particle {
 }
 
 export default function TemporalRiftBackground() {
-  // We need two canvases: one hidden for the simulation, one visible for the effect
+  // Canvas for the simulation
   const visibleCanvasRef = useRef<HTMLCanvasElement>(null);
-  const sourceCanvasRef = useRef<HTMLCanvasElement>(null); // This will be hidden
 
   const animationFrameRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
@@ -141,6 +140,8 @@ export default function TemporalRiftBackground() {
       window.removeEventListener("click", handleClick);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

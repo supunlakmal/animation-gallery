@@ -40,7 +40,6 @@ export default function HypnoticSpirals() {
 
             ctx.beginPath();
             const arms = 10;
-            const step = 0.5;
             
             // Draw arms
             for(let a=0; a<arms; a++) {

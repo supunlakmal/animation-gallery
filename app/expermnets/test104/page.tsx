@@ -26,31 +26,6 @@ export default function LiquidChrome() {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      const rows = 20;
-      const cols = 20;
-      const cellW = width / cols;
-      const cellH = height / rows;
-
-      ctx.beginPath();
-      for (let r = 0; r <= rows; r++) {
-         for(let c = 0; c <= cols; c++) {
-             // Calculate distortion
-             const x = c * cellW;
-             const y = r * cellH;
-             
-             // Noise-like sine waves
-             const dx = Math.sin(x * 0.01 + time + y * 0.01) * 20;
-             const dy = Math.cos(y * 0.01 + time + x * 0.01) * 20;
-
-             // Draw control points or lines?
-             // Let's draw a mesh
-             // We need to draw lines to neighbors
-             
-             // But simpler visual: Just draw distorted circles?
-             // Or better: blobs.
-         }
-      }
-      
       // Let's try a different approach: Metaballs-ish gradient fill
       // Or just many overlapping sine waves creating interference that looks like liquid metal
       

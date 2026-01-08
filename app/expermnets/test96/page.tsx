@@ -9,6 +9,7 @@ export default function WarpSpeed() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const context = ctx;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -51,20 +52,20 @@ export default function WarpSpeed() {
 
         const size = (1 - this.z / width) * 4;
         
-        ctx.beginPath();
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = size;
-        ctx.moveTo(px, py);
-        ctx.lineTo(sx, sy);
-        ctx.stroke();
+        context.beginPath();
+        context.strokeStyle = "white";
+        context.lineWidth = size;
+        context.moveTo(px, py);
+        context.lineTo(sx, sy);
+        context.stroke();
       }
     }
 
     const stars = Array.from({ length: 500 }, () => new Star());
 
     const animate = () => {
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, width, height);
+      context.fillStyle = "black";
+      context.fillRect(0, 0, width, height);
 
       stars.forEach(s => {
           s.update();

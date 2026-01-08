@@ -60,6 +60,8 @@ export default function AsciiNoise() {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(frameId);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full" />;

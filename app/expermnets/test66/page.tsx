@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function SierpinskiZoom() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,35 +20,6 @@ export default function SierpinskiZoom() {
       height = canvas.height = window.innerHeight;
     };
     window.addEventListener("resize", resize);
-
-    const drawTriangle = (x: number, y: number, r: number) => {
-      // Don't draw if too small
-      if (r < 5) return;
-
-      // Check bounds
-      if (x + r < 0 || x - r > width || y + r < 0 || y - r > height) return;
-
-      // Draw
-      ctx.strokeStyle = `hsl(${(x + y) * 0.1 + zoom * 10}, 70%, 50%)`;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      // Triangle calculations
-      const h = r * Math.sqrt(3) / 2;
-      ctx.moveTo(x, y - h);
-      ctx.lineTo(x - r / 2, y + h / 2);
-      ctx.lineTo(x + r / 2, y + h / 2);
-      ctx.closePath();
-      ctx.stroke();
-
-      // Recursive calls (Inverted Sierpinski logic for interesting look)
-      // Actually let's just draw the gasket
-      // Top
-      drawTriangle(x, y - h / 2, r / 2);
-      // Left
-      drawTriangle(x - r / 4, y + h / 4, r / 2);
-      // Right
-      drawTriangle(x + r / 4, y + h / 4, r / 2);
-    };
 
     const animate = () => {
       ctx.fillStyle = "#000";

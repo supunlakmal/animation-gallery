@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function RetroGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -71,19 +71,14 @@ export default function RetroGrid() {
       // Moving Horizontal Lines
       offset = (offset + 1) % 50;
       for (let i = 0; i < height; i+=2) {
-         // Logarithmic spacing for perspective 
-         // Simple linear approach for retro look:
-         const z = 1000 / (i + 1); // pseudo depth
-         const y = horizonY + (10000 / z) % height; 
-         // Proper perspective horizontal lines
+        // Logarithmic spacing for perspective 
+        // Simple linear approach for retro look:
+        // Proper perspective horizontal lines
       }
       
       // Moving Grid simple approach
-      const speed = 2;
-      
       // Vertical fan
       for (let i = -20; i <= 20; i++) {
-        const x = centerX + i * 100;
         ctx.beginPath();
         ctx.moveTo(centerX, horizonY);
         ctx.lineTo(centerX + (i * width * 1.5), height);

@@ -67,7 +67,6 @@ export default function VaporwaveSun() {
              // Focus point is cx, horizon
              // Actually, focus point is cx, horizon.
              // Line goes from (cx + off, canvas.height) to (cx + off*0.1, horizon)
-             const xBottom = cx + i * 100 + (Math.sin(time * 0.5) * 50); // Just shift?
              // proper perspective
              const x1 = cx + i * 100;
              const x2 = cx + i * 10;
@@ -78,9 +77,7 @@ export default function VaporwaveSun() {
         }
 
         // Horizontal lines (moving down)
-        const gridSpeed = (time * 100) % 100;
         for (let i=0; i<20; i++) {
-            const yBase = horizon + Math.pow(i, 2) * 5; // Exponential spacing for depth
              // Moving logic:
              // Map i + offset
              
@@ -93,17 +90,12 @@ export default function VaporwaveSun() {
              const zPos = (z - time * 200) % 1000;
              if (zPos < 0) continue;
              
-             const y = horizon + (200 / (1050 - zPos)) * 500; // perspective projection ish
-             
              // Wait, simpler:
              // Just plain horizontal lines
         }
         
         const lines = 16;
         for (let i = 0; i < lines; i++) {
-            const p = (i + time * 0.5) % lines;
-            const y = horizon + (p/lines) * (canvas.height - horizon);
-            
             // Improve math for exponential floor
             // Normalized 0-1
             const t = (i/lines + time * 0.05) % 1;

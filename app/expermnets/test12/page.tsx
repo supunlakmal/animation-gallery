@@ -154,6 +154,8 @@ export default function GlyphWeaverBackground() {
       window.removeEventListener("mouseup", handleMouseUp);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

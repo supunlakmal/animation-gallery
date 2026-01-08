@@ -11,8 +11,8 @@ export default function WaveSynthesis() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    const width = (canvas.width = window.innerWidth);
+    const height = (canvas.height = window.innerHeight);
 
     const animate = (time: number) => {
       ctx.fillStyle = "#050505";

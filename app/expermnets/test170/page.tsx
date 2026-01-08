@@ -20,7 +20,6 @@ export default function PixelSort() {
     };
     window.addEventListener("resize", resize);
     
-    let imgData: ImageData;
     let sortedX = 0;
 
     const reset = () => {
@@ -39,7 +38,6 @@ export default function PixelSort() {
         // Actually sorting real pixels is heavy on CPU for JS Canvas every frame for full screen.
         // Let's Simulate it.
         // Or process column by column.
-        imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         sortedX = 0;
     };
     

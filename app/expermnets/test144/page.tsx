@@ -18,7 +18,7 @@ interface Cube {
 
 export default function FloatingGlassCubes() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const cubesRef = useRef<Cube[]>([]);
 
   const config = {
@@ -76,16 +76,16 @@ export default function FloatingGlassCubes() {
     const rotate = (x: number, y: number, z: number, rx: number, ry: number, rz: number) => {
         // Simple rotation matrices applied
         // Rotate X
-        let y1 = y * Math.cos(rx) - z * Math.sin(rx);
-        let z1 = y * Math.sin(rx) + z * Math.cos(rx);
+        const y1 = y * Math.cos(rx) - z * Math.sin(rx);
+        const z1 = y * Math.sin(rx) + z * Math.cos(rx);
         
         // Rotate Y
-        let x2 = x * Math.cos(ry) + z1 * Math.sin(ry);
-        let z2 = -x * Math.sin(ry) + z1 * Math.cos(ry);
+        const x2 = x * Math.cos(ry) + z1 * Math.sin(ry);
+        const z2 = -x * Math.sin(ry) + z1 * Math.cos(ry);
         
         // Rotate Z
-        let x3 = x2 * Math.cos(rz) - y1 * Math.sin(rz);
-        let y3 = x2 * Math.sin(rz) + y1 * Math.cos(rz);
+        const x3 = x2 * Math.cos(rz) - y1 * Math.sin(rz);
+        const y3 = x2 * Math.sin(rz) + y1 * Math.cos(rz);
         
         return { x: x3, y: y3, z: z2 };
     };
@@ -158,6 +158,8 @@ export default function FloatingGlassCubes() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full bg-white" />;

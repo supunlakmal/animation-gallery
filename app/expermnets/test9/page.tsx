@@ -142,8 +142,6 @@ export default function AetherLensBackground() {
       const lensTop = mouseY - config.lensRadius;
       const lensSize = config.lensRadius * 2;
 
-      // Save the area behind the lens
-      const lensImageData = ctx.getImageData(lensLeft, lensTop, lensSize, lensSize);
       ctx.clearRect(lensLeft, lensTop, lensSize, lensSize);
 
       ctx.font = config.font;
@@ -157,7 +155,6 @@ export default function AetherLensBackground() {
 
         if (dist < config.lensRadius) {
           // This point is inside the lens, so we draw its distorted version
-          const angle = Math.atan2(dy, dx);
           const force = (config.lensRadius - dist) / config.lensRadius; // Stronger at center
 
           // Use noise for a fluid, shimmering displacement
@@ -191,6 +188,8 @@ export default function AetherLensBackground() {
       window.removeEventListener("mouseup", handleMouseUp);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

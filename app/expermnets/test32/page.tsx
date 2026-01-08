@@ -40,8 +40,6 @@ export default function CyberGrid() {
         for (let j = 0; j < 30; j++) {
             const z = j * gridSize - zOffset;
             const y = vanishY + (height - vanishY) * (z / height);
-            const scale = (y - vanishY) / (height - vanishY);
-            
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(width, y);

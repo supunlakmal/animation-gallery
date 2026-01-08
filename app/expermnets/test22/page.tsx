@@ -48,9 +48,9 @@ export default function HyperTopology() {
 
     const project = (x: number, y: number, z: number, rotationX: number, rotationY: number) => {
       // Rotation
-      let nx = x * Math.cos(rotationY) - z * Math.sin(rotationY);
+      const nx = x * Math.cos(rotationY) - z * Math.sin(rotationY);
       let nz = x * Math.sin(rotationY) + z * Math.cos(rotationY);
-      let ny = y * Math.cos(rotationX) - nz * Math.sin(rotationX);
+      const ny = y * Math.cos(rotationX) - nz * Math.sin(rotationX);
       nz = y * Math.sin(rotationX) + nz * Math.cos(rotationX);
 
       // Move camera back
@@ -181,7 +181,7 @@ export default function HyperTopology() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [mouseRef, noise2D]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#010103]">

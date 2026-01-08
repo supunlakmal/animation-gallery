@@ -16,8 +16,6 @@ export default function GlitchReality() {
     // We will draw some text / shapes and then "glitch" sections
     // by copying parts of the canvas to other parts.
 
-    let frame = 0;
-
     const animate = () => {
       // Clear with slight fade for trails? No, glitches are usually sharp.
       // But we need to redraw base content.
@@ -41,33 +39,13 @@ export default function GlitchReality() {
       const numGlitches = Math.floor(Math.random() * 10) + 5;
       
       for(let i=0; i<numGlitches; i++) {
-          const glitchWidth = Math.random() * width;
-          const glitchHeight = Math.random() * 50 + 5;
-          const x = Math.random() * width;
-          const y = Math.random() * height;
-          
-          const spliceWidth = Math.random() * width;
-          const spliceX = Math.random() * width;
-          
-          // Copy a slice from somewhere else
-          // Or just shift color channels
-          
-          // Simple slice displacement:
-          // Get image data
-          const spliceY = Math.random() * height;
-          // Usually glitches are horizontal slices
-          // We can simulate this by `drawImage` from self to self with offset
-          
-          const sx = 0;
           const sy = Math.random() * height;
           const sw = width;
           const sh = Math.random() * 30 + 5;
           const dx = (Math.random() - 0.5) * 50; // shift x
           const dy = sy;
-          const dw = width;
-          const dh = sh;
           
-          ctx.drawImage(canvas, sx, sy, sw, sh, dx, dy, dw, dh);
+          ctx.drawImage(canvas, 0, sy, sw, sh, dx, dy, width, sh);
           
           // Color Overlay (RGB Split)
           ctx.fillStyle = `rgba(${Math.random()>0.5?255:0}, ${Math.random()>0.5?255:0}, ${Math.random()>0.5?255:0}, 0.2)`;
@@ -84,8 +62,6 @@ export default function GlitchReality() {
           ctx.stroke();
       }
 
-
-      frame++;
       // Limit framerate for more "jerky" glitch feel
       // setTimeout(() => requestAnimationFrame(animate), 50); 
       // Actually native 60fps glitch is fine

@@ -35,7 +35,7 @@ class Boid {
 
     const perception = 50;
 
-    for (let other of boids) {
+    for (const other of boids) {
       const d = Math.sqrt((this.x - other.x) ** 2 + (this.y - other.y) ** 2);
       if (other !== this && d < perception) {
         // Separation
@@ -113,7 +113,7 @@ class Boid {
 
 export default function BoidsSimulation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const boidsRef = useRef<Boid[]>([]);
 
   useEffect(() => {

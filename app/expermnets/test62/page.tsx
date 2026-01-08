@@ -13,7 +13,7 @@ interface Particle {
 
 export default function FlowFieldV2() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const noise3D = createNoise3D(Math.random);
 
@@ -107,6 +107,8 @@ export default function FlowFieldV2() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -4,7 +4,7 @@ import { createNoise3D } from "simplex-noise";
 
 export default function HexagonGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const noise3D = createNoise3D(Math.random);
 
   // Hex helpers
@@ -36,11 +36,9 @@ export default function HexagonGrid() {
     window.addEventListener("resize", resize);
 
     const radius = 30; // Hex radius
-    const a = 2 * Math.PI / 6;
     const r = radius; 
     const w = Math.sqrt(3) * r; // Width of hex
     const h = 2 * r; // Height of hex
-    const hShift = w;
     const vShift = h * 0.75;
 
 
@@ -84,6 +82,8 @@ export default function HexagonGrid() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

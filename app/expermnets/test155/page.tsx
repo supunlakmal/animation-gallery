@@ -24,7 +24,7 @@ export default function Kaleidoscope() {
     const slices = 12;
     const sliceAngle = (Math.PI * 2) / slices;
 
-    const drawSlice = (angle: number) => {
+    const drawSlice = () => {
         // Just some random moving shapes
         const r1 = Math.sin(time) * 100 + 150;
         const r2 = Math.cos(time * 0.5) * 100 + 150;
@@ -60,11 +60,11 @@ export default function Kaleidoscope() {
             ctx.rotate(i * sliceAngle);
             
             // Draw one slice
-            drawSlice(i * sliceAngle);
+            drawSlice();
             
             // Draw mirrored slice
             ctx.scale(1, -1);
-            drawSlice(i * sliceAngle);
+            drawSlice();
             
             ctx.restore();
         }

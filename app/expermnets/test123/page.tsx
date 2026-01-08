@@ -30,13 +30,11 @@ export default function Tunnel() {
       ctx.lineWidth = 2;
       
       for(let i=0; i<20; i++) {
-          let dist = (i * 200 + z) % 4000;
+          const dist = (i * 200 + z) % 4000;
           if (dist < 10) continue;
           
           const size = 10000 / dist;
-          const alpha = Math.min(1, dist/1000); // Fade in far away? No fade out near
-          
-          // Actually fading in from center (far)
+          // Fade in from center
           const opacity = Math.min(1, size / 100); 
 
           ctx.strokeStyle = `rgba(0, 255, 128, ${opacity})`;

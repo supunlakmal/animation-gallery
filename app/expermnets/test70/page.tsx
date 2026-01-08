@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function BreathingCircles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;

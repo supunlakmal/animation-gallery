@@ -15,7 +15,7 @@ export default function GravityGrid() {
     canvas.width = width;
     canvas.height = height;
 
-    let mouse = { x: width/2, y: height/2 };
+    const mouse = { x: width/2, y: height/2 };
 
     const animate = () => {
       ctx.fillStyle = "#fff";

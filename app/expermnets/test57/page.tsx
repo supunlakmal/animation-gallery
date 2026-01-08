@@ -17,7 +17,6 @@ export default function ZenGarden() {
     
     // Config
     const maxDepth = 10;
-    const branches = 2;
     // We want it to grow over time.
     
     // Actually, let's do L-system style or just recursive drawing that slowly expands.

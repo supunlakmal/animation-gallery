@@ -15,7 +15,7 @@ interface Particle {
 
 export default function BioluminescentFlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const noise2D = createNoise2D();
 
@@ -136,6 +136,8 @@ export default function BioluminescentFlow() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full bg-[#0a141e]" />;

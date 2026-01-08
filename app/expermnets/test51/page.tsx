@@ -62,21 +62,15 @@ export default function NeonVoid() {
       for (let i = 0; i < height - horizon; i+=gridSize) {
         // Linear spacing in 2D is wrong for 3D perspective, but for 'retro' feel linear + acceleration is ok
         // Let's do a simple 3D projection look
-        const z = 1 / (1 - i / (height)); // Fake z depth
-        // Actually simpler: just draw lines at y positions that are exponential
+        // Fake z depth calc skipped for retro simplicity
       }
 
       // Draw Vertical Lines (converging to center)
       const centerX = width / 2;
-      const fov = 300;
-        
       // Draw grid floor
       for(let z=0; z<2000; z+=gridSize * 2) {
           const depth = (z - offset) % 1000; // loop
           if(depth < 1) continue;
-          
-          const scale = fov / (fov + depth);
-          const y = horizon + 200 * scale * 2; // Arbitrary 200 height to floor
           
           // Horizontal moving lines
          // This is getting complicated to do purely from scratch in one go conceptually.

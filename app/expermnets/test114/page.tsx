@@ -22,7 +22,7 @@ export default function StarWarp() {
         color: string;
     }
     
-    let stars: Star[] = [];
+    const stars: Star[] = [];
     const count = 400;
     
     for(let i=0; i<count; i++) {

@@ -26,7 +26,6 @@ export default function HypnoticSpirals() {
       
       // Draw spinning shapes
       const numShapes = 20;
-      const maxRadius = Math.min(width, height) * 0.4;
       
       for(let i=0; i<numShapes; i++) {
         // Each shape rotates a bit differently

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function AudioVisualizerConfig() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,7 +37,6 @@ export default function AudioVisualizerConfig() {
       for (let i = 0; i < bars; i++) {
         const h = barValues[i] * 4;
         const x = i * barWidth;
-        const y = height / 2 - h / 2;
 
         const hue = (i / bars) * 360;
         ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;

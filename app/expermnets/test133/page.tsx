@@ -27,7 +27,7 @@ export default function SpiderWeb() {
         });
     }
     
-    let mouse = { x: 0, y: 0 };
+    const mouse = { x: 0, y: 0 };
 
     const animate = () => {
       ctx.fillStyle = "#eee";

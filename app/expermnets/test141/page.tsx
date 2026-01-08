@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 export default function NeonPulseGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -83,7 +83,9 @@ export default function NeonPulseGrid() {
 
     return () => {
       window.removeEventListener("resize", resize);
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, []);
 

@@ -51,7 +51,7 @@ export default function ParticlesMorph() {
         const cy = height / 2;
         const r = 200;
         
-        particles.forEach((p, i) => {
+        particles.forEach((p) => {
             if (shape === 0) {
                 // Circle
                 const angle = Math.random() * Math.PI * 2;

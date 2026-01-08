@@ -26,7 +26,7 @@ export default function ConfettiCannon() {
         size: number;
     }
     
-    let confetti: Confetti[] = [];
+    const confetti: Confetti[] = [];
     
     const fire = (x: number, y: number) => {
         for(let i=0; i<50; i++) {

@@ -38,8 +38,6 @@ export default function LissajousCurves() {
               const fx = i + 1;
               const fy = j + 1;
               
-              const x = cx + Math.cos(angle * fx) * r * 0.4; // Local coords? No, this is wrong for classic table.
-              
               // Classic table:
               // Top row defines X for column
               // Left col defines Y for row

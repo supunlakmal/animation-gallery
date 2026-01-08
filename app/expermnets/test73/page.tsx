@@ -4,7 +4,7 @@ import { createNoise2D } from "simplex-noise";
 
 export default function Aurora() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const noise2D = createNoise2D(Math.random);
 
   useEffect(() => {
@@ -68,6 +68,8 @@ export default function Aurora() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

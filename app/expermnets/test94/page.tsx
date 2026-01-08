@@ -24,7 +24,6 @@ export default function AudioVisualizer() {
       ctx.fillRect(0, 0, width, height);
 
       const bars = 64;
-      const barWidth = width / bars;
       
       const cx = width / 2;
       const cy = height / 2;
@@ -69,6 +68,8 @@ export default function AudioVisualizer() {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(frameId);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full" />;

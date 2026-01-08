@@ -31,7 +31,6 @@ export default function DNAHelix() {
 
       time += 0.05;
       
-      const strands = 2;
       const pointsPerStrand = 40;
       const spacing = 20;
       const radius = 100;

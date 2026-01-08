@@ -32,8 +32,6 @@ export default function SpiralGalaxy() {
 
     const stars: Star[] = [];
     const numStars = 2000;
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
 
     for(let i=0; i<numStars; i++) {
         const dist = Math.random() * (Math.min(canvas.width, canvas.height) / 2);

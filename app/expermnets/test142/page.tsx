@@ -13,7 +13,7 @@ interface Point {
 
 export default function ElasticNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const pointsRef = useRef<Point[]>([]);
 
   const config = {
@@ -163,6 +163,8 @@ export default function ElasticNetwork() {
       window.removeEventListener("resize", resize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full bg-[#111]" />;

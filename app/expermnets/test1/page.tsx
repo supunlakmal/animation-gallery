@@ -99,7 +99,7 @@ export default function AnimatedBackground() {
     window.addEventListener("click", handleClick);
 
     // --- Animation Loop ---
-    const animate = (timestamp: number) => {
+    const animate = () => {
       // 1. Fade the canvas to create trails
       ctx.fillStyle = config.fadeRate;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -156,7 +156,7 @@ export default function AnimatedBackground() {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate(0);
+    animate();
 
     // Cleanup
     return () => {
@@ -170,6 +170,8 @@ export default function AnimatedBackground() {
         clearTimeout(mouseMoveTimeoutRef.current);
       }
     };
+    // Intentionally run once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this runs only once
 
   return (

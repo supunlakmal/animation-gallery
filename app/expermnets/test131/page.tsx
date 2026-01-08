@@ -56,8 +56,6 @@ export default function RetrowaveGrid() {
       
       // Horizontal moving lines
       time += 2;
-      const offset = time % 40;
-      
       // Draw horizontal lines with perspective spacing
       // y = H/2 + d / z
       for(let z=10; z<500; z+=10) {

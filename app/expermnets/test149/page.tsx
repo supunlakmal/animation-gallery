@@ -28,8 +28,6 @@ export default function InteractiveCloth() {
     // Physics constants
     const gravity = 0.5;
     const friction = 0.99;
-    const bounce = 0.9;
-    const tension = 6; // stiffness
 
     interface Point {
       x: number;

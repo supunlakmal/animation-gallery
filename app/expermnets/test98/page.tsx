@@ -9,6 +9,7 @@ export default function FireSmoke() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const context = ctx;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -47,25 +48,25 @@ export default function FireSmoke() {
       }
 
       draw() {
-        ctx.beginPath();
-        ctx.fillStyle = `${this.color}, ${this.life})`;
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        context.beginPath();
+        context.fillStyle = `${this.color}, ${this.life})`;
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.fill();
         
         // Glow
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = `${this.color}, 1)`;
+        context.shadowBlur = 20;
+        context.shadowColor = `${this.color}, 1)`;
       }
     }
 
     const particles: Particle[] = [];
 
     const animate = () => {
-      ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, width, height);
+      context.globalCompositeOperation = "source-over";
+      context.fillStyle = "black";
+      context.fillRect(0, 0, width, height);
       
-      ctx.globalCompositeOperation = "lighter"; // Additive blending for fire
+      context.globalCompositeOperation = "lighter"; // Additive blending for fire
 
       // Spawn
       for (let i = 0; i < 5; i++) {
@@ -82,7 +83,7 @@ export default function FireSmoke() {
       }
 
       // Reset
-      ctx.shadowBlur = 0;
+      context.shadowBlur = 0;
       requestAnimationFrame(animate);
     };
 

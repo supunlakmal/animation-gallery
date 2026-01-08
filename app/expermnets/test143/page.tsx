@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 export default function KineticRings() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
