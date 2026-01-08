@@ -148,7 +148,7 @@ export default function ExperimentsGallery() {
 
         {filteredExperiments.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-[#6b6560]">No animations found for "{search}"</p>
+            <p className="text-[#6b6560]">No animations found for &ldquo;{search}&rdquo;</p>
           </div>
         )}
       </main>
